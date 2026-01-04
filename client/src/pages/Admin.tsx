@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { apiClient } from "../lib/api";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -41,8 +42,16 @@ function Admin() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8" dir="rtl">
       <div className="max-w-md mx-auto">
+        <div className="mb-4">
+          <Link
+            to="/admin"
+            className="text-primary hover:underline text-sm"
+          >
+            ← חזרה לניהול משתמשים
+          </Link>
+        </div>
         <h1 className="text-3xl font-bold mb-6">יצירת משתמש חדש</h1>
         {message && (
           <div className="mb-4 p-3 bg-green-500/10 text-green-600 rounded-lg text-sm">

@@ -96,6 +96,10 @@ class ApiClient {
     return this.request<User>("/auth/me");
   }
 
+  async getAllUsers(): Promise<User[]> {
+    return this.request<User[]>("/auth/users");
+  }
+
   async createUser(
     email: string,
     password: string,
@@ -104,6 +108,12 @@ class ApiClient {
     return this.request<{ message: string; user: User }>("/auth/users", {
       method: "POST",
       body: JSON.stringify({ email, password, role }),
+    });
+  }
+
+  async deleteUser(id: string): Promise<{ message: string }> {
+    return this.request<{ message: string }>(`/auth/users/${id}`, {
+      method: "DELETE",
     });
   }
 

@@ -5,6 +5,7 @@ import SignIn from "./pages/SignIn";
 import Feed from "./pages/Feed";
 import VideoPlayer from "./pages/VideoPlayer";
 import Admin from "./pages/Admin";
+import UserManagement from "./pages/UserManagement";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuth } from "./contexts/AuthContext";
 
@@ -40,6 +41,14 @@ function App() {
         />
         <Route
           path="admin"
+          element={
+            <ProtectedRoute>
+              <UserManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="admin/create-user"
           element={
             <ProtectedRoute>
               <Admin />

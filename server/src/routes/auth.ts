@@ -81,6 +81,30 @@ router.get(
   }
 );
 
+// Admin: Get all users
+router.get(
+  "/users",
+  authenticate,
+  requireAdmin,
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const users = await User.find()
+        .select("-password")
+        .sort({ createdAt: -1 });
+      res.json(
+        users.map((user) => ({
+          id: user._id,
+          email: user.email,
+          role: user.role,
+        }))
+      );
+    } catch (error: any) {
+      console.error("Get users error:", error);
+      res.status(500).json({ message: "שגיאה בשרת" });
+    }
+  }
+);
+
 // Admin: Create new user
 router.post(
   "/users",
@@ -120,6 +144,36 @@ router.post(
       });
     } catch (error: any) {
       console.error("Create user error:", error);
+      res.status(500).json({ message: "שגיאה בשרת" });
+    }
+  }
+);
+
+// Admin: Delete user
+router.delete(
+  "/users/:id",
+  authenticate,
+  requireAdmin,
+  async (req: AuthRequest, res: Response): Promise<void> => {
+    try {
+      const userId = req.params.id;
+
+      // Prevent admin from deleting themselves
+      if (userId === req.user!.id) {
+        res.status(400).json({ message: "לא ניתן למחוק את עצמך" });
+        return;
+      }
+
+      const user = await User.findById(userId);
+      if (!user) {
+        res.status(404).json({ message: "משתמש לא נמצא" });
+        return;
+      }
+
+      await User.findByIdAndDelete(userId);
+      res.json({ message: "משתמש נמחק בהצלחה" });
+    } catch (error: any) {
+      console.error("Delete user error:", error);
       res.status(500).json({ message: "שגיאה בשרת" });
     }
   }
