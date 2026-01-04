@@ -45,10 +45,7 @@ function Admin() {
     <div className="container mx-auto px-4 py-8" dir="rtl">
       <div className="max-w-md mx-auto">
         <div className="mb-4">
-          <Link
-            to="/admin"
-            className="text-primary hover:underline text-sm"
-          >
+          <Link to="/admin" className="text-primary hover:underline text-sm">
             ← חזרה לניהול משתמשים
           </Link>
         </div>
