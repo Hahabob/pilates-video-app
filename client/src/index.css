@@ -43,24 +43,24 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: #ffffff;
   --foreground: #333366;
-  --card: oklch(1 0 0);
+  --card: #ffffff;
   --card-foreground: #333366;
-  --popover: oklch(1 0 0);
+  --popover: #ffffff;
   --popover-foreground: #333366;
-  --primary: oklch(0.216 0.006 56.043);
-  --primary-foreground: oklch(0.985 0.001 106.423);
-  --secondary: oklch(0.97 0.001 106.424);
-  --secondary-foreground: oklch(0.216 0.006 56.043);
-  --muted: oklch(0.97 0.001 106.424);
+  --primary: #559292;
+  --primary-foreground: #ffffff;
+  --secondary: #cadbcb;
+  --secondary-foreground: #333366;
+  --muted: #ece9ed;
   --muted-foreground: #333366;
-  --accent: oklch(0.97 0.001 106.424);
-  --accent-foreground: oklch(0.216 0.006 56.043);
+  --accent: #cadbcb;
+  --accent-foreground: #333366;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.923 0.003 48.717);
-  --input: oklch(0.923 0.003 48.717);
-  --ring: oklch(0.709 0.01 56.259);
+  --border: #ece9ed;
+  --input: #ece9ed;
+  --ring: #559292;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -151,5 +151,10 @@
   a:hover {
     color: #1a1a33;
     text-decoration: underline;
+  }
+  input:focus {
+    outline: none;
+    border-color: #559292;
+    box-shadow: 0 0 0 2px rgba(85, 146, 146, 0.2);
   }
 }

@@ -125,7 +125,7 @@ function Feed() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8" style={{ backgroundColor: '#e2dce2' }}>
+      <div className="container mx-auto px-4 py-8" style={{ backgroundColor: '#ece9ed' }}>
         <div className="text-center">טוען תרגילים...</div>
       </div>
     );
@@ -172,7 +172,8 @@ function Feed() {
             placeholder="חפש לפי שם התרגיל..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-input rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full pl-10 pr-4 py-2 border rounded-lg bg-background text-foreground"
+            style={{ borderColor: '#cadbcb' } as React.CSSProperties}
           />
         </div>
       </div>
@@ -245,7 +246,8 @@ function Feed() {
               <Link
                 key={exercise._id}
                 to={`/video-player/${exercise._id}`}
-                className="border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer bg-white"
+                className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer bg-white"
+                style={{ borderColor: '#cadbcb' }}
               >
                 <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
                   {thumbnailUrl ? (
@@ -293,7 +295,8 @@ function Feed() {
             onClick={() => setIsFilterOpen(false)}
           />
           {/* Sidebar */}
-          <div className="fixed top-0 right-0 h-full w-80 bg-background border-l border-border z-50 shadow-xl transition-transform duration-300 ease-in-out">
+          <div className="fixed top-0 right-0 h-full w-80 bg-white border-l z-50 shadow-xl transition-transform duration-300 ease-in-out"
+               style={{ borderColor: '#cadbcb' }}>
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold">סינון לפי רמה</h2>

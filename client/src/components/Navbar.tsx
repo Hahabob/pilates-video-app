@@ -19,12 +19,15 @@ function Navbar() {
   return (
     <nav className="border-b border-border bg-card">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center">
+        <div
+          className="flex items-center justify-between"
+          style={{ minHeight: "80px" }}
+        >
+          <Link to="/" className="flex items-center -ml-4">
             <img
               src={earthandsky}
               alt="שמיים וארץ"
-              className="h-16 w-auto object-contain"
+              className="h-20 w-auto object-contain"
             />
           </Link>
           <div className="flex gap-4 items-center">
