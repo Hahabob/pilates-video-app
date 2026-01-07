@@ -40,7 +40,10 @@ function VideoPlayer() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div
+        className="container mx-auto px-4 py-8"
+        style={{ backgroundColor: "#ece8ed" }}
+      >
         <div className="text-center">טוען...</div>
       </div>
     );
@@ -48,7 +51,10 @@ function VideoPlayer() {
 
   if (error || !exercise) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div
+        className="container mx-auto px-4 py-8"
+        style={{ backgroundColor: "#ece8ed" }}
+      >
         <div className="max-w-4xl mx-auto">
           <div className="text-center">
             <p className="text-xl font-semibold mb-2 text-destructive">
@@ -70,7 +76,10 @@ function VideoPlayer() {
   const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div
+      className="container mx-auto px-4 py-8"
+      style={{ backgroundColor: "#ece8ed" }}
+    >
       <div className="max-w-4xl mx-auto">
         <button
           onClick={() => navigate("/")}
@@ -81,7 +90,10 @@ function VideoPlayer() {
 
         {/* Video Section - Only show if Video_URL exists */}
         {exercise.Video_URL && embedUrl && (
-          <div className="aspect-video bg-muted rounded-lg mb-6 overflow-hidden">
+          <div
+            className="aspect-video bg-muted rounded-lg mb-6 overflow-hidden"
+            style={{ border: "3px solid #333366" }}
+          >
             <iframe
               width="100%"
               height="100%"

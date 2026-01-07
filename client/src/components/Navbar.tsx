@@ -19,35 +19,40 @@ function Navbar() {
   return (
     <nav
       className="border-b border-border"
-      style={{ backgroundColor: "hsl(290, 20%, 98.2%)" }}
+      style={{ background: "hsl(290, 20%, 98.2%)" }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto pl-4">
         <div
           className="flex items-center justify-between"
           style={{ minHeight: "80px" }}
         >
           <Link to="/" className="flex items-center">
             <img
+              src="/facivon-qilates-32x32.png"
+              alt="שמיים וארץ"
+              className="h-8 w-auto object-contain md:hidden pr-4"
+            />
+            <img
               src={earthandsky}
               alt="שמיים וארץ"
-              className="h-20 w-auto object-contain"
+              className="h-20 w-auto object-contain hidden md:block"
             />
           </Link>
           <div className="flex gap-4 items-center">
             {user ? (
               <>
-                <Link
-                  to="/"
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    isActive("/")
-                      ? "bg-primary text-primary-foreground"
-                      : "text-foreground hover:bg-muted"
-                  }`}
-                >
-                  סרטונים
-                </Link>
                 {isAdmin() && (
                   <>
+                    <Link
+                      to="/"
+                      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                        isActive("/")
+                          ? "bg-primary text-primary-foreground"
+                          : "text-foreground hover:bg-muted"
+                      }`}
+                    >
+                      סרטונים
+                    </Link>
                     <Link
                       to="/admin"
                       className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
@@ -61,7 +66,7 @@ function Navbar() {
                   </>
                 )}
                 <span className="text-sm text-muted-foreground">
-                  {user.email}
+                  {user.email?.split("@")[0]}
                 </span>
                 <button
                   onClick={handleLogout}

@@ -157,4 +157,13 @@
     border-color: #559292;
     box-shadow: 0 0 0 2px rgba(85, 146, 146, 0.2);
   }
+  a.no-underline:hover {
+    text-decoration: none !important;
+  }
+  /* .exercise-card:hover {
+    box-shadow: 10px 10px 10px 0px rgba(85, 146, 146, 0.81);
+  } */
+  .exercise-card:hover {
+    box-shadow: 0px 0px 6px 6px rgba(85,146,146,0.8);
+  }
 }

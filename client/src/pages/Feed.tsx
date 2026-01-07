@@ -125,14 +125,20 @@ function Feed() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div
+        className="container mx-auto px-4 py-8"
+        style={{ backgroundColor: "#ece8ed" }}
+      >
         <div className="text-center">טוען תרגילים...</div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div
+      className="container mx-auto px-4 py-8"
+      style={{ backgroundColor: "#ece8ed" }}
+    >
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">סרטונים</h1>
         <div className="flex gap-2">
@@ -246,7 +252,7 @@ function Feed() {
               <Link
                 key={exercise._id}
                 to={`/video-player/${exercise._id}`}
-                className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                className="border rounded-lg overflow-hidden transition-shadow cursor-pointer no-underline hover:no-underline exercise-card"
                 style={{
                   borderColor: "#cadbcb",
                   backgroundColor: "hsl(290, 20%, 98.2%)",
@@ -270,7 +276,7 @@ function Feed() {
                   )}
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold mb-2">{exercise.Name}</h3>
+                  <h3 className="font-bold mb-2">{exercise.Name}</h3>
                   {/* {exercise.Exercise_move && (
                     <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
                       {exercise.Exercise_move}
