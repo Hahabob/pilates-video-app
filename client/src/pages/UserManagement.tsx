@@ -16,6 +16,16 @@ function UserManagement() {
   }>({ isOpen: false, user: null });
   const [deleting, setDeleting] = useState(false);
 
+  const getAccessLevelLabel = (role: string): string => {
+    const labels: Record<string, string> = {
+      admin: "מנהל",
+      mat: "מזרן",
+      machine: "מכשירים",
+      combined: "משולב",
+    };
+    return labels[role] || role;
+  };
+
   useEffect(() => {
     if (isAdmin()) {
       loadUsers();
@@ -135,7 +145,12 @@ function UserManagement() {
               key={user.id}
               className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors"
             >
-              <span className="text-foreground">{user.email}</span>
+              <div className="flex flex-col">
+                <span className="text-foreground">{user.email}</span>
+                <span className="text-sm text-muted-foreground">
+                  רמת גישה: {getAccessLevelLabel(user.role)}
+                </span>
+              </div>
               <button
                 onClick={() => handleDeleteClick(user)}
                 disabled={user.id === currentUser?.id}

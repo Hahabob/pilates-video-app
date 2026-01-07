@@ -14,6 +14,7 @@ interface AuthContextType {
   logout: () => void;
   isAdmin: () => boolean;
   refreshUser: () => Promise<void>;
+  getAccessLevelLabel: (role: string) => string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -51,6 +52,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return user?.role === "admin";
   };
 
+  const getAccessLevelLabel = (role: string): string => {
+    const labels: Record<string, string> = {
+      admin: "מנהל",
+      mat: "מזרן",
+      machine: "מכשירים",
+      combined: "משולב",
+    };
+    return labels[role] || role;
+  };
+
   const refreshUser = async () => {
     if (apiClient.isAuthenticated()) {
       try {
@@ -64,7 +75,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, login, logout, isAdmin, refreshUser }}
+      value={{
+        user,
+        loading,
+        login,
+        logout,
+        isAdmin,
+        refreshUser,
+        getAccessLevelLabel,
+      }}
     >
       {children}
     </AuthContext.Provider>

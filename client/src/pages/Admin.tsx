@@ -7,7 +7,9 @@ function Admin() {
   const { isAdmin } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<"user" | "admin">("user");
+  const [role, setRole] = useState<"admin" | "mat" | "machine" | "combined">(
+    "combined"
+  );
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,7 +35,7 @@ function Admin() {
       setMessage(result.message);
       setEmail("");
       setPassword("");
-      setRole("user");
+      setRole("combined");
     } catch (err: any) {
       setError(err.message || "שגיאה ביצירת משתמש");
     } finally {
@@ -84,14 +86,20 @@ function Admin() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">תפקיד</label>
+            <label className="block text-sm font-medium mb-2">רמת גישה</label>
             <select
               value={role}
-              onChange={(e) => setRole(e.target.value as "user" | "admin")}
+              onChange={(e) =>
+                setRole(
+                  e.target.value as "admin" | "mat" | "machine" | "combined"
+                )
+              }
               className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
             >
-              <option value="user">משתמש</option>
               <option value="admin">מנהל</option>
+              <option value="mat">מזרן</option>
+              <option value="machine">מכשירים</option>
+              <option value="combined">משולב</option>
             </select>
           </div>
           <button

@@ -21,27 +21,42 @@ router.get(
   authenticate,
   async (req: AuthRequest, res: Response): Promise<void> => {
     try {
-      const exercises = await Exercise.find();
-      
+      let exercises = await Exercise.find();
+
+      // Filter exercises based on user access level
+      const userRole = req.user?.role;
+      if (userRole === "mat") {
+        // Mat users: only exercises with Machine_type === "mat"
+        exercises = exercises.filter(
+          (ex) => ex.Machine_type?.toLowerCase() === "mat"
+        );
+      } else if (userRole === "machine") {
+        // Machine users: all exercises except mat (Machine_type !== "mat" and exists)
+        exercises = exercises.filter(
+          (ex) => ex.Machine_type && ex.Machine_type.toLowerCase() !== "mat"
+        );
+      }
+      // "combined" and "admin" get all exercises (no filtering)
+
       // Sort exercises: first by machine type (mat first), then by order field
       const sortedExercises = exercises.sort((a, b) => {
         const aMachineType = (a.Machine_type || "").toLowerCase();
         const bMachineType = (b.Machine_type || "").toLowerCase();
-        
+
         const aOrder = MACHINE_TYPE_ORDER[aMachineType] || 999;
         const bOrder = MACHINE_TYPE_ORDER[bMachineType] || 999;
-        
+
         // First sort by machine type order
         if (aOrder !== bOrder) {
           return aOrder - bOrder;
         }
-        
+
         // Then sort by order field (spreadsheet row order)
         const aRowOrder = a.order || 0;
         const bRowOrder = b.order || 0;
         return aRowOrder - bRowOrder;
       });
-      
+
       res.json(sortedExercises);
     } catch (error: any) {
       console.error("Get exercises error:", error);
@@ -61,6 +76,26 @@ router.get(
         res.status(404).json({ message: "תרגיל לא נמצא" });
         return;
       }
+
+      // Check access based on user role
+      const userRole = req.user?.role;
+      const exerciseMachineType = exercise.Machine_type?.toLowerCase();
+
+      if (userRole === "mat") {
+        // Mat users: only access to mat exercises
+        if (exerciseMachineType !== "mat") {
+          res.status(403).json({ message: "אין לך הרשאה לגשת לתרגיל זה" });
+          return;
+        }
+      } else if (userRole === "machine") {
+        // Machine users: access to all non-mat exercises
+        if (!exerciseMachineType || exerciseMachineType === "mat") {
+          res.status(403).json({ message: "אין לך הרשאה לגשת לתרגיל זה" });
+          return;
+        }
+      }
+      // "combined" and "admin" have access to all exercises
+
       res.json(exercise);
     } catch (error: any) {
       console.error("Get exercise error:", error);

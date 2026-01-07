@@ -104,7 +104,7 @@ class ApiClient {
   async createUser(
     email: string,
     password: string,
-    role: string = "user"
+    role: string = "combined"
   ): Promise<{ message: string; user: User }> {
     return this.request<{ message: string; user: User }>("/auth/users", {
       method: "POST",

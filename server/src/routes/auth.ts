@@ -126,10 +126,18 @@ router.post(
         return;
       }
 
+      // Validate role
+      const validRoles = ["admin", "mat", "machine", "combined"];
+      const userRole = role || "combined";
+      if (!validRoles.includes(userRole)) {
+        res.status(400).json({ message: "רמת גישה לא תקינה" });
+        return;
+      }
+
       const newUser = new User({
         email: email.toLowerCase(),
         password,
-        role: role || "user",
+        role: userRole,
       });
 
       await newUser.save();
