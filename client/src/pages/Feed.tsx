@@ -125,14 +125,14 @@ function Feed() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8" style={{ backgroundColor: '#ece9ed' }}>
+      <div className="container mx-auto px-4 py-8">
         <div className="text-center">טוען תרגילים...</div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8" style={{ backgroundColor: '#e2dce2' }}>
+    <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">סרטונים</h1>
         <div className="flex gap-2">
@@ -173,7 +173,7 @@ function Feed() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2 border rounded-lg bg-background text-foreground"
-            style={{ borderColor: '#cadbcb' } as React.CSSProperties}
+            style={{ borderColor: "#cadbcb" } as React.CSSProperties}
           />
         </div>
       </div>
@@ -247,7 +247,7 @@ function Feed() {
                 key={exercise._id}
                 to={`/video-player/${exercise._id}`}
                 className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer bg-white"
-                style={{ borderColor: '#cadbcb' }}
+                style={{ borderColor: "#cadbcb" }}
               >
                 <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
                   {thumbnailUrl ? (
@@ -295,8 +295,10 @@ function Feed() {
             onClick={() => setIsFilterOpen(false)}
           />
           {/* Sidebar */}
-          <div className="fixed top-0 right-0 h-full w-80 bg-white border-l z-50 shadow-xl transition-transform duration-300 ease-in-out"
-               style={{ borderColor: '#cadbcb' }}>
+          <div
+            className="fixed top-0 right-0 h-full w-80 bg-white border-l z-50 shadow-xl transition-transform duration-300 ease-in-out"
+            style={{ borderColor: "#cadbcb" }}
+          >
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold">סינון לפי רמה</h2>

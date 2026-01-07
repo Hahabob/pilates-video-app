@@ -23,7 +23,7 @@ function Navbar() {
           className="flex items-center justify-between"
           style={{ minHeight: "80px" }}
         >
-          <Link to="/" className="flex items-center -ml-4">
+          <Link to="/" className="flex items-center">
             <img
               src={earthandsky}
               alt="שמיים וארץ"
@@ -34,9 +34,9 @@ function Navbar() {
             {user ? (
               <>
                 <Link
-                  to="/feed"
+                  to="/"
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    isActive("/feed")
+                    isActive("/")
                       ? "bg-primary text-primary-foreground"
                       : "text-foreground hover:bg-muted"
                   }`}
