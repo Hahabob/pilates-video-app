@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
-import HomePage from "./pages/HomePage";
 import SignIn from "./pages/SignIn";
 import Feed from "./pages/Feed";
 import VideoPlayer from "./pages/VideoPlayer";
@@ -17,19 +16,15 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route
           index
-          element={user ? <Navigate to="/feed" replace /> : <HomePage />}
-        />
-        <Route
-          path="sign-in"
-          element={user ? <Navigate to="/feed" replace /> : <SignIn />}
-        />
-        <Route
-          path="feed"
           element={
             <ProtectedRoute>
               <Feed />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="sign-in"
+          element={user ? <Navigate to="/" replace /> : <SignIn />}
         />
         <Route
           path="video-player/:id?"
