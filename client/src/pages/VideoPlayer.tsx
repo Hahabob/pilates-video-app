@@ -73,7 +73,7 @@ function VideoPlayer() {
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
         <button
-          onClick={() => navigate("/feed")}
+          onClick={() => navigate("/")}
           className="mb-4 text-muted-foreground hover:text-foreground"
         >
           חזור לרשימת התרגילים ←

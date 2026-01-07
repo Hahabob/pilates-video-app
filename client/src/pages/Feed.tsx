@@ -125,14 +125,14 @@ function Feed() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8" style={{ backgroundColor: '#e2dce2' }}>
         <div className="text-center">טוען תרגילים...</div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8" style={{ backgroundColor: '#e2dce2' }}>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">סרטונים</h1>
         <div className="flex gap-2">
@@ -245,7 +245,7 @@ function Feed() {
               <Link
                 key={exercise._id}
                 to={`/video-player/${exercise._id}`}
-                className="border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                className="border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer bg-white"
               >
                 <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
                   {thumbnailUrl ? (
