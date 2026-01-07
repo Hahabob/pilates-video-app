@@ -246,8 +246,11 @@ function Feed() {
               <Link
                 key={exercise._id}
                 to={`/video-player/${exercise._id}`}
-                className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer bg-white"
-                style={{ borderColor: "#cadbcb" }}
+                className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                style={{
+                  borderColor: "#cadbcb",
+                  backgroundColor: "hsl(290, 20%, 98.2%)",
+                }}
               >
                 <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
                   {thumbnailUrl ? (

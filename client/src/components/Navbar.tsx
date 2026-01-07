@@ -17,7 +17,10 @@ function Navbar() {
   };
 
   return (
-    <nav className="border-b border-border bg-card">
+    <nav
+      className="border-b border-border"
+      style={{ backgroundColor: "hsl(290, 20%, 98.2%)" }}
+    >
       <div className="container mx-auto px-4">
         <div
           className="flex items-center justify-between"
