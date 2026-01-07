@@ -24,7 +24,7 @@ function Feed() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { isAdmin } = useAuth();
+  const { isAdmin, user } = useAuth();
   const [syncing, setSyncing] = useState(false);
   const [selectedMachineType, setSelectedMachineType] = useState<string | null>(
     null
@@ -177,43 +177,47 @@ function Feed() {
         </div>
       </div>
 
-      {/* Machine Type Selector */}
-      <div className="mb-6 overflow-x-auto">
-        <div className="flex gap-2 pb-2">
-          <button
-            onClick={() => setSelectedMachineType(null)}
-            className={`px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
-              selectedMachineType === null
-                ? "bg-primary text-primary-foreground"
-                : "bg-secondary text-secondary-foreground hover:opacity-90"
-            }`}
-          >
-            הכל
-          </button>
-          {MACHINE_TYPES.filter((type) =>
-            availableMachineTypes.includes(type.value.toLowerCase())
-          ).map((type) => (
+      {/* Machine Type Selector - Hidden for mat users */}
+      {user?.role !== "mat" && (
+        <div className="mb-6 overflow-x-auto">
+          <div className="flex gap-2 pb-2">
             <button
-              key={type.value}
-              onClick={() => setSelectedMachineType(type.value)}
+              onClick={() => setSelectedMachineType(null)}
               className={`px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
-                selectedMachineType === type.value
+                selectedMachineType === null
                   ? "bg-primary text-primary-foreground"
                   : "bg-secondary text-secondary-foreground hover:opacity-90"
               }`}
             >
-              {type.label}
+              הכל
             </button>
-          ))}
+            {MACHINE_TYPES.filter((type) =>
+              availableMachineTypes.includes(type.value.toLowerCase())
+            ).map((type) => (
+              <button
+                key={type.value}
+                onClick={() => setSelectedMachineType(type.value)}
+                className={`px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
+                  selectedMachineType === type.value
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground hover:opacity-90"
+                }`}
+              >
+                {type.label}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Machine Type Title */}
-      {selectedMachineType && (
+      {user?.role === "mat" ? (
+        <h2 className="text-2xl font-semibold mb-4">מזרן</h2>
+      ) : selectedMachineType ? (
         <h2 className="text-2xl font-semibold mb-4">
           {getMachineTypeLabel(selectedMachineType)}
         </h2>
-      )}
+      ) : null}
 
       {/* Exercises Grid */}
       {filteredExercises.length === 0 ? (
