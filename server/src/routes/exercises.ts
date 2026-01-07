@@ -5,14 +5,44 @@ import { syncExercisesFromSheets } from "../services/googleSheets";
 
 const router = express.Router();
 
+// Machine type order: mat first, then others in spreadsheet order
+const MACHINE_TYPE_ORDER: Record<string, number> = {
+  mat: 1,
+  reformer: 2,
+  "wunda chair": 3,
+  cadillac: 4,
+  "spring board": 5,
+  "ladder barrel": 6,
+};
+
 // Get all exercises (protected route)
 router.get(
   "/",
   authenticate,
   async (req: AuthRequest, res: Response): Promise<void> => {
     try {
-      const exercises = await Exercise.find().sort({ createdAt: -1 });
-      res.json(exercises);
+      const exercises = await Exercise.find();
+      
+      // Sort exercises: first by machine type (mat first), then by order field
+      const sortedExercises = exercises.sort((a, b) => {
+        const aMachineType = (a.Machine_type || "").toLowerCase();
+        const bMachineType = (b.Machine_type || "").toLowerCase();
+        
+        const aOrder = MACHINE_TYPE_ORDER[aMachineType] || 999;
+        const bOrder = MACHINE_TYPE_ORDER[bMachineType] || 999;
+        
+        // First sort by machine type order
+        if (aOrder !== bOrder) {
+          return aOrder - bOrder;
+        }
+        
+        // Then sort by order field (spreadsheet row order)
+        const aRowOrder = a.order || 0;
+        const bRowOrder = b.order || 0;
+        return aRowOrder - bRowOrder;
+      });
+      
+      res.json(sortedExercises);
     } catch (error: any) {
       console.error("Get exercises error:", error);
       res.status(500).json({ message: "שגיאה בשרת" });

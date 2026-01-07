@@ -17,6 +17,7 @@ export interface IExercise extends Document {
   Video_URL?: string;
   Machine_type?: string;
   Series?: string;
+  order?: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -71,6 +72,9 @@ const ExerciseSchema = new Schema<IExercise>(
     },
     Series: {
       type: String,
+    },
+    order: {
+      type: Number,
     },
   },
   {

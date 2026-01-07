@@ -47,7 +47,8 @@ export const syncExercisesFromSheets = async (): Promise<{
     let syncedCount = 0;
     const errors: string[] = [];
 
-    for (const row of dataRows) {
+    for (let rowIndex = 0; rowIndex < dataRows.length; rowIndex++) {
+      const row = dataRows[rowIndex];
       if (!row || row.length === 0) continue;
 
       try {
@@ -68,6 +69,7 @@ export const syncExercisesFromSheets = async (): Promise<{
         // Prepare exercise document with exact field names
         const exerciseDoc: Partial<IExercise> = {
           Name: exerciseData.Name,
+          order: rowIndex + 1, // Preserve spreadsheet row order (1-indexed)
         };
 
         // Map all fields if they exist (following new column order)

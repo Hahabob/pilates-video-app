@@ -34,6 +34,7 @@ export interface Exercise {
   Video_URL?: string;
   Machine_type?: string;
   Series?: string;
+  order?: number;
 }
 
 class ApiClient {
