@@ -21,7 +21,7 @@ function Navbar() {
       className="border-b border-border"
       style={{ background: "hsl(290, 20%, 98.2%)" }}
     >
-      <div className="container mx-auto pl-4">
+      <div className="container mx-auto px-4">
         <div
           className="flex items-center justify-between"
           style={{ minHeight: "80px" }}
@@ -30,7 +30,7 @@ function Navbar() {
             <img
               src="/facivon-qilates-32x32.png"
               alt="שמיים וארץ"
-              className="h-8 w-auto object-contain md:hidden pr-4"
+              className="h-8 w-auto object-contain md:hidden px-4"
             />
             <img
               src={earthandsky}
