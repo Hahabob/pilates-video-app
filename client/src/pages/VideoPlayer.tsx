@@ -118,71 +118,108 @@ function VideoPlayer() {
         )}
 
         <div>
-          <h1 className="text-2xl font-bold mb-4">{exercise.Name}</h1>
+          <h1 className="text-2xl font-bold mb-4 flex items-center gap-2">
+            <span className="w-1 h-6 bg-current rounded-full"></span>
+            {exercise.Name}
+          </h1>
           {exercise.Exercise_move && (
-            <p className="text-muted-foreground mb-4">
-              {exercise.Exercise_move}
-            </p>
+            <>
+              <p className="text-black">
+                {exercise.Exercise_move}
+              </p>
+              <hr className="border-current mb-4" />
+            </>
           )}
           <div className="space-y-4">
             {exercise.Machine_setup && (
               <div>
-                <h3 className="font-semibold mb-1">הגדרת מכונה:</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-1 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-current rounded-full"></span>
+                  הגדרת מכונה:
+                </h3>
+                <p className="text-m  text-black">
                   {exercise.Machine_setup}
                 </p>
+                <hr className="border-current mb-4" />
               </div>
             )}
             {exercise.Cues && (
               <div>
-                <h3 className="font-semibold mb-1">דגשים:</h3>
-                <p className="text-sm text-muted-foreground">{exercise.Cues}</p>
+                <h3 className="font-semibold mb-1 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-current rounded-full"></span>
+                  דגשים:
+                </h3>
+                <p className="text-m  text-black">{exercise.Cues}</p>
+                <hr className="border-current mb-4" />
               </div>
             )}
             {exercise.Modifications && (
               <div>
-                <h3 className="font-semibold mb-1">מודיפיקציות:</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-1 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-current rounded-full"></span>
+                  מודיפיקציות:
+                </h3>
+                <p className="text-m  text-black">
                   {exercise.Modifications}
                 </p>
+                <hr className="border-current mb-4" />
               </div>
             )}
             {exercise.Contraindications && (
               <div>
-                <h3 className="font-semibold mb-1"> קונטראנידיקציות:</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-1 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-current rounded-full"></span>
+                  קונטראנידיקציות:
+                </h3>
+                <p className="text-m  text-black">
                   {exercise.Contraindications}
                 </p>
+                <hr className="border-current mb-4" />
               </div>
             )}
             {exercise.Peel_backs && (
               <div>
-                <h3 className="font-semibold mb-1">Peel Backs:</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-1 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-current rounded-full"></span>
+                  Peel Backs:
+                </h3>
+                <p className="text-m  text-black">
                   {exercise.Peel_backs}
                 </p>
+                <hr className="border-current mb-4" />
               </div>
             )}
             {exercise.Strengthen && (
               <div>
-                <h3 className="font-semibold mb-1">חיזוק:</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-1 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-current rounded-full"></span>
+                  חיזוק:
+                </h3>
+                <p className="text-m  text-black">
                   {exercise.Strengthen}
                 </p>
+                <hr className="border-current mb-4" />
               </div>
             )}
             {exercise.Stretch && (
               <div>
-                <h3 className="font-semibold mb-1">מתיחה:</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-1 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-current rounded-full"></span>
+                  מתיחה:
+                </h3>
+                <p className="text-m  text-black">
                   {exercise.Stretch}
                 </p>
+                <hr className="border-current mb-4" />
               </div>
             )}
             {exercise.Series && (
               <div>
-                <h3 className="font-semibold mb-1">סדרה:</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-1 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-current rounded-full"></span>
+                  סדרה:
+                </h3>
+                <p className="text-sm  text-black">
                   {exercise.Series}
                 </p>
               </div>
