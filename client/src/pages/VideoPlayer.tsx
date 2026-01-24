@@ -118,12 +118,17 @@ function VideoPlayer() {
         )}
 
         <div>
-          <h1 className="text-2xl font-bold mb-4 flex items-center gap-2">
+          <h1 className="text-3xl font-bold mb-4 flex items-center gap-2" dir="ltr">
             <span className="w-1 h-6 bg-current rounded-full"></span>
             {exercise.Name}
           </h1>
+            <hr className="border-current mb-4" />
           {exercise.Exercise_move && (
             <>
+                <h3 className="font-semibold mb-1 flex items-center gap-2">
+                  <span className="w-1 h-4 bg-current rounded-full"></span>
+                    מהלך התרגיל:
+                </h3>
               <p className="text-black">
                 {exercise.Exercise_move}
               </p>
