@@ -96,7 +96,11 @@ function Feed() {
     // Filter by search query (case-insensitive, partial match)
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter((ex) => ex.Name.toLowerCase().includes(query));
+      filtered = filtered.filter((ex) =>
+        ex.Name.toLowerCase().includes(query) ||
+        (ex.Strengthen && ex.Strengthen.toLowerCase().includes(query)) ||
+        (ex.Stretch && ex.Stretch.toLowerCase().includes(query))
+      );
     }
 
     // Filter by selected levels
@@ -175,7 +179,7 @@ function Feed() {
           />
           <input
             type="text"
-            placeholder="חפש לפי שם התרגיל..."
+            placeholder="חפש לפי שם התרגיל, חיזוק או מתיחה..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2 border rounded-lg bg-background text-foreground"
