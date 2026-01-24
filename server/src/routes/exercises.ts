@@ -65,6 +65,95 @@ router.get(
   }
 );
 
+// Admin: Sync exercises from Google Sheets
+router.post(
+  "/sync",
+  authenticate,
+  requireAdmin,
+  async (req: AuthRequest, res: Response): Promise<void> => {
+    try {
+      const result = await syncExercisesFromSheets();
+      if (result.success) {
+        res.json({
+          message: result.message,
+          count: result.count,
+        });
+      } else {
+        res.status(500).json({
+          message: result.message,
+          count: result.count,
+        });
+      }
+    } catch (error: any) {
+      console.error("Sync exercises error:", error);
+      res.status(500).json({ message: "שגיאה בסנכרון" });
+    }
+  }
+);
+
+// Admin: Restore spreadsheet - generate CSV with all exercise data
+router.get(
+  "/restore",
+  authenticate,
+  requireAdmin,
+  async (req: AuthRequest, res: Response): Promise<void> => {
+    try {
+      // Get all exercises without filtering (admin gets everything)
+      const exercises = await Exercise.find().sort({ order: 1 });
+
+      if (exercises.length === 0) {
+        res.status(404).json({ message: "לא נמצאו תרגילים" });
+        return;
+      }
+
+      // Define CSV headers based on the Exercise model
+      const headers = [
+        "Name",
+        "Page",
+        "Machine_setup",
+        "Exercise_move",
+        "Function_target_muscles",
+        "Strengthen",
+        "Stretch",
+        "Cues",
+        "Modifications",
+        "Contraindications",
+        "Peel_backs",
+        "Repetitions",
+        "Level",
+        "Image_URL",
+        "Video_URL",
+        "Machine_type",
+        "Series",
+      ];
+
+      // Convert exercises to CSV format
+      const csvRows = exercises.map((exercise) => {
+        return headers.map((header) => {
+          const value = (exercise as any)[header];
+          // Escape quotes and wrap in quotes if value contains comma, quote, or newline
+          if (value && (value.includes(",") || value.includes('"') || value.includes("\n"))) {
+            return `"${value.replace(/"/g, '""')}"`;
+          }
+          return value || "";
+        }).join(",");
+      });
+
+      // Create CSV content
+      const csvContent = [headers.join(","), ...csvRows].join("\n");
+
+      // Set headers for CSV download
+      res.setHeader("Content-Type", "text/csv");
+      res.setHeader("Content-Disposition", `attachment; filename="pilates-exercises-${new Date().toISOString().split('T')[0]}.csv"`);
+
+      res.send(csvContent);
+    } catch (error: any) {
+      console.error("Restore exercises error:", error);
+      res.status(500).json({ message: "שגיאה ביצירת קובץ השחזור" });
+    }
+  }
+);
+
 // Get single exercise by ID
 router.get(
   "/:id",
@@ -100,32 +189,6 @@ router.get(
     } catch (error: any) {
       console.error("Get exercise error:", error);
       res.status(500).json({ message: "שגיאה בשרת" });
-    }
-  }
-);
-
-// Admin: Sync exercises from Google Sheets
-router.post(
-  "/sync",
-  authenticate,
-  requireAdmin,
-  async (req: AuthRequest, res: Response): Promise<void> => {
-    try {
-      const result = await syncExercisesFromSheets();
-      if (result.success) {
-        res.json({
-          message: result.message,
-          count: result.count,
-        });
-      } else {
-        res.status(500).json({
-          message: result.message,
-          count: result.count,
-        });
-      }
-    } catch (error: any) {
-      console.error("Sync exercises error:", error);
-      res.status(500).json({ message: "שגיאה בסנכרון" });
     }
   }
 );

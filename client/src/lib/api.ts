@@ -133,6 +133,29 @@ class ApiClient {
     });
   }
 
+  async restoreSpreadsheet(): Promise<Blob> {
+    const token = this.getToken();
+    const headers: Record<string, string> = {};
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${API_BASE_URL}/exercises/restore`, {
+      method: "GET",
+      headers,
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({
+        message: "שגיאה בשרת",
+      }));
+      throw new Error(error.message || "שגיאה בשרת");
+    }
+
+    return response.blob();
+  }
+
   isAuthenticated(): boolean {
     return !!this.getToken();
   }

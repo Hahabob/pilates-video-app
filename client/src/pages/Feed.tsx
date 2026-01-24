@@ -26,6 +26,7 @@ function Feed() {
   const [error, setError] = useState("");
   const { isAdmin, user } = useAuth();
   const [syncing, setSyncing] = useState(false);
+  const [restoring, setRestoring] = useState(false);
   const [selectedMachineType, setSelectedMachineType] = useState<string | null>(
     null
   );
@@ -59,6 +60,29 @@ function Feed() {
       alert(err.message || "שגיאה בסנכרון");
     } finally {
       setSyncing(false);
+    }
+  };
+
+  const handleRestore = async () => {
+    try {
+      setRestoring(true);
+      const blob = await apiClient.restoreSpreadsheet();
+
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `pilates-exercises-${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      alert("קובץ השחזור הורד בהצלחה");
+    } catch (err: any) {
+      alert(err.message || "שגיאה בהורדת קובץ השחזור");
+    } finally {
+      setRestoring(false);
     }
   };
 
@@ -203,13 +227,22 @@ function Feed() {
             )}
           </div>
           {isAdmin() && (
-            <button
-              onClick={handleSync}
-              disabled={syncing}
-              className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
-            >
-              {syncing ? "מסנכרן..." : "סנכרן מגיליון"}
-            </button>
+            <>
+              <button
+                onClick={handleSync}
+                disabled={syncing}
+                className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
+                {syncing ? "מסנכרן..." : "סנכרן מגיליון"}
+              </button>
+              <button
+                onClick={handleRestore}
+                disabled={restoring}
+                className="bg-secondary text-secondary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
+                {restoring ? "משחזר..." : "שחזר גיליון"}
+              </button>
+            </>
           )}
         </div>
       </div>
