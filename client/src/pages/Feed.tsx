@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { apiClient, type Exercise } from "../lib/api";
 import { useAuth } from "../contexts/AuthContext";
-import { Filter, X, Search } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 
 const MACHINE_TYPES = [
   { value: "mat", label: "מזרן" },
