@@ -133,22 +133,6 @@ function VideoPlayer() {
                 </p>
               </div>
             )}
-            {exercise.Function_target_muscles && (
-              <div>
-                <h3 className="font-semibold mb-1">שרירי יעד:</h3>
-                <p className="text-sm text-muted-foreground">
-                  {exercise.Function_target_muscles}
-                </p>
-              </div>
-            )}
-            {exercise.Muscle_group && (
-              <div>
-                <h3 className="font-semibold mb-1">קבוצת שרירים:</h3>
-                <p className="text-sm text-muted-foreground">
-                  {exercise.Muscle_group}
-                </p>
-              </div>
-            )}
             {exercise.Cues && (
               <div>
                 <h3 className="font-semibold mb-1">דגשים:</h3>
@@ -176,6 +160,22 @@ function VideoPlayer() {
                 <h3 className="font-semibold mb-1">Peel Backs:</h3>
                 <p className="text-sm text-muted-foreground">
                   {exercise.Peel_backs}
+                </p>
+              </div>
+            )}
+            {exercise.Strengthen && (
+              <div>
+                <h3 className="font-semibold mb-1">חיזוק:</h3>
+                <p className="text-sm text-muted-foreground">
+                  {exercise.Strengthen}
+                </p>
+              </div>
+            )}
+            {exercise.Stretch && (
+              <div>
+                <h3 className="font-semibold mb-1">מתיחה:</h3>
+                <p className="text-sm text-muted-foreground">
+                  {exercise.Stretch}
                 </p>
               </div>
             )}

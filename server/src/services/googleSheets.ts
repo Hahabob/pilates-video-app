@@ -81,8 +81,10 @@ export const syncExercisesFromSheets = async (): Promise<{
         if (exerciseData.Function_target_muscles)
           exerciseDoc.Function_target_muscles =
             exerciseData.Function_target_muscles;
-        if (exerciseData.Muscle_group)
-          exerciseDoc.Muscle_group = exerciseData.Muscle_group;
+        if (exerciseData.Strengthen)
+          exerciseDoc.Strengthen = exerciseData.Strengthen;
+        if (exerciseData.Stretch)
+          exerciseDoc.Stretch = exerciseData.Stretch;
         if (exerciseData.Cues) exerciseDoc.Cues = exerciseData.Cues;
         if (exerciseData.Modifications)
           exerciseDoc.Modifications = exerciseData.Modifications;

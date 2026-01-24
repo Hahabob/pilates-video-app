@@ -23,7 +23,8 @@ export interface Exercise {
   Machine_setup?: string;
   Exercise_move?: string;
   Function_target_muscles?: string;
-  Muscle_group?: string;
+  Strengthen?: string;
+  Stretch?: string;
   Cues?: string;
   Modifications?: string;
   Contraindications?: string;

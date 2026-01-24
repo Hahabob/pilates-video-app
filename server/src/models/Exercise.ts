@@ -6,7 +6,8 @@ export interface IExercise extends Document {
   Machine_setup?: string;
   Exercise_move?: string;
   Function_target_muscles?: string;
-  Muscle_group?: string;
+  Strengthen?: string;
+  Stretch?: string;
   Cues?: string;
   Modifications?: string;
   Contraindications?: string;
@@ -40,7 +41,10 @@ const ExerciseSchema = new Schema<IExercise>(
     Function_target_muscles: {
       type: String,
     },
-    Muscle_group: {
+    Strengthen: {
+      type: String,
+    },
+    Stretch: {
       type: String,
     },
     Cues: {
