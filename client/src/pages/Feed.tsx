@@ -146,13 +146,62 @@ function Feed() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">סרטונים</h1>
         <div className="flex gap-2">
-          <button
-            onClick={() => setIsFilterOpen(true)}
-            className="bg-secondary text-secondary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2"
-          >
-            <Filter size={18} />
-            מסנן
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+              className="bg-secondary text-secondary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2"
+            >
+              <Filter size={18} />
+              מסנן
+            </button>
+
+            {/* Dropdown Menu */}
+            {isFilterOpen && (
+              <>
+                {/* Backdrop */}
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setIsFilterOpen(false)}
+                />
+                {/* Dropdown */}
+                <div
+                  className="absolute top-full right-0 mt-1 w-64 bg-white border rounded-lg shadow-lg z-50"
+                  style={{
+                    borderColor: "#cadbcb",
+                    backgroundColor: "hsl(290, 20%, 98.2%)",
+                  }}
+                >
+                  <div className="p-4">
+                    <h3 className="text-sm font-semibold mb-3">סינון לפי רמה</h3>
+                    <div className="space-y-3">
+                      {LEVELS.map((level) => (
+                        <label
+                          key={level.value}
+                          className="flex items-center gap-3 cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedLevels.includes(level.value)}
+                            onChange={() => handleLevelToggle(level.value)}
+                            className="w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-ring"
+                          />
+                          <span className="text-sm">{level.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {selectedLevels.length > 0 && (
+                      <button
+                        onClick={() => setSelectedLevels([])}
+                        className="mt-4 w-full px-3 py-2 text-sm bg-secondary text-secondary-foreground rounded-lg hover:opacity-90 transition-opacity"
+                      >
+                        נקה סינון
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
           {isAdmin() && (
             <button
               onClick={handleSync}
@@ -288,7 +337,7 @@ function Feed() {
                   )} */}
                   <div className="flex gap-2 text-xs text-muted-foreground">
                     {exercise.Level && <span>level: {exercise.Level}</span>}
-                    {exercise.Repetitions && (
+                    {exercise.Series && (
                       <span>• סדרה: {exercise.Series}</span>
                     )}
                   </div>
@@ -299,57 +348,6 @@ function Feed() {
         </div>
       )}
 
-      {/* Filter Sidebar */}
-      {isFilterOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/50 z-40"
-            onClick={() => setIsFilterOpen(false)}
-          />
-          {/* Sidebar */}
-          <div
-            className="fixed top-0 right-0 h-full w-80 bg-white border-l z-50 shadow-xl transition-transform duration-300 ease-in-out"
-            style={{ borderColor: "#cadbcb" }}
-          >
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold">סינון לפי רמה</h2>
-                <button
-                  onClick={() => setIsFilterOpen(false)}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-              <div className="space-y-4">
-                {LEVELS.map((level) => (
-                  <label
-                    key={level.value}
-                    className="flex items-center gap-3 cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedLevels.includes(level.value)}
-                      onChange={() => handleLevelToggle(level.value)}
-                      className="w-5 h-5 rounded border-border text-primary focus:ring-2 focus:ring-ring"
-                    />
-                    <span>{level.label}</span>
-                  </label>
-                ))}
-              </div>
-              {selectedLevels.length > 0 && (
-                <button
-                  onClick={() => setSelectedLevels([])}
-                  className="mt-6 w-full px-4 py-2 text-sm bg-secondary text-secondary-foreground rounded-lg hover:opacity-90 transition-opacity"
-                >
-                  נקה סינון
-                </button>
-              )}
-            </div>
-          </div>
-        </>
-      )}
     </div>
   );
 }
